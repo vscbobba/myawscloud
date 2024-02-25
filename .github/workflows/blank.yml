@@ -54,7 +54,9 @@ jobs:
         run: terraform init
         
       - name: lint Terraform
-        run: tflint
+        run: |
+           curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+           tflint --init
         
       - name: Start Terraform
         run:  terraform plan
