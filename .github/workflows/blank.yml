@@ -30,7 +30,29 @@ jobs:
         run: echo Hello, world!
 
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Install AWS CLI
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          sudo apt-get update
+          sudo apt-get install -y awscli
+      - name: Configure AWS CLI
+        run: |
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws configure set default.region ${{ secrets.AWS_REGION }}
+      - name: install checkov
+        run: pip3 install checkov
+        
+      - name: run chekcov
+        run: checkov -d .
+      
+      - name: format Terraform
+        run: terraform fmt
+        
+      - name: start terraform
+        run: terraform init
+        
+      - name: lint Terraform
+        run: tflint
+        
+      - name: Start Terraform
+        run:  terraform plan
