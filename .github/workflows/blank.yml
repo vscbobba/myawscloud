@@ -4,11 +4,11 @@ name: CI
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "master" branch
+  # Triggers the workflow on push or pull request events but only for the "sandbox" branch
   push:
-    branches: [ "master" ]
+    branches: [ "sandbox" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "sandbox" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -55,8 +55,11 @@ jobs:
         
       - name: lint Terraform
         run: |
-           curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+           curl -s https://raw.githubusercontent.com/terraform-linters/tflint/sandbox/install_linux.sh | bash
            tflint --init
         
       - name: Start Terraform
         run:  terraform plan
+      
+      - name: Start Terraform
+        run:  terraform apply --auto-approve
