@@ -44,8 +44,8 @@ jobs:
       - name: install checkov
         run: pip3 install checkov
         
-      #- name: run chekcov
-      #  run: checkov -d .
+      - name: run chekcov
+        run: checkov -d . --skip-check CKV2_GHA_1
       
       - name: format Terraform
         run: terraform fmt
