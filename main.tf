@@ -1,5 +1,6 @@
 resource "aws_flow_log" "example" {
   traffic_type    = "ALL"
+  log_destination = "cloud-watch-logs"
   vpc_id          = aws_vpc.office_vpc.id
 }
 
