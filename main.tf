@@ -1,5 +1,4 @@
 resource "aws_flow_log" "example" {
-  iam_role_arn    = "arn"
   log_destination = "log"
   traffic_type    = "ALL"
   vpc_id          = aws_vpc.office_vpc.id
